@@ -3,173 +3,310 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>i2c.pl · Dane do faktury</title>
-  <meta name="description" content="i2c Mikołaj Szymański · NIP 9562242859">
+  <title>i2c · Mikołaj Szymański</title>
+  <meta name="description" content="Kontakt i dane do faktury: i2c Mikołaj Szymański, NIP 9562242859.">
   <meta name="robots" content="noindex">
-  <meta property="og:title" content="i2c.pl · Dane do faktury">
-  <meta property="og:description" content="i2c Mikołaj Szymański · NIP 9562242859">
-  <meta name="theme-color" content="#f5f5f2" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0c0c0f" media="(prefers-color-scheme: dark)">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%232f5bff'/%3E%3Ctext%20x='16'%20y='20.5'%20fill='%23fff'%20font-family='ui-monospace,Menlo,Consolas,monospace'%20font-size='12'%20font-weight='700'%20text-anchor='middle'%3Ei2c%3C/text%3E%3C/svg%3E">
+  <meta property="og:title" content="i2c · Mikołaj Szymański">
+  <meta property="og:description" content="Kontakt i dane do faktury · NIP 9562242859">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/mulish-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/mulish-latin-ext-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <style>
-    :root {
-      --bg: #f5f5f2;
-      --glow: rgb(47 91 255 / 0.08);
-      --surface: #ffffff;
-      --text: #121216;
-      --muted: #676773;
-      --border: #e3e3dc;
-      --accent: #2f5bff;
-      --shadow: 0 1px 2px rgb(18 18 22 / 0.04), 0 24px 48px -24px rgb(18 18 22 / 0.2);
-      --radius: 1.5rem;
-      --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-      color-scheme: light dark;
+    /* Mulish (SIL OFL 1.1, see fonts/OFL.txt), self-hosted: no requests to third parties. */
+    @font-face {
+      font-family: "Mulish";
+      font-style: normal;
+      font-weight: 200 1000;
+      font-display: swap;
+      src: url("fonts/mulish-latin-ext-wght-normal.woff2") format("woff2-variations"),
+           url("fonts/mulish-latin-ext-wght-normal.woff2") format("woff2");
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0c0c0f;
-        --glow: rgb(142 165 255 / 0.1);
-        --surface: #17171c;
-        --text: #f2f2f5;
-        --muted: #a1a1ae;
-        --border: #2a2a33;
-        --accent: #8ea5ff;
-        --shadow: 0 24px 48px -24px rgb(0 0 0 / 0.8);
-      }
+    @font-face {
+      font-family: "Mulish";
+      font-style: normal;
+      font-weight: 200 1000;
+      font-display: swap;
+      src: url("fonts/mulish-latin-wght-normal.woff2") format("woff2-variations"),
+           url("fonts/mulish-latin-wght-normal.woff2") format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    :root {
+      --ink: #000;
+      --paper: #fff;
+      /* Shape unit: logo strokes are 10 units thick. */
+      --u: clamp(2.6px, 0.8vw, 5px);
+      --header-space: 6.5rem;
+      color-scheme: light;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
 
     body {
       margin: 0;
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      background: radial-gradient(60rem 24rem at 50% -6rem, var(--glow), transparent 70%) no-repeat, var(--bg);
-      color: var(--text);
-      font-family: var(--font-sans);
-      line-height: 1.4;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Mulish", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
     }
 
-    .site-header,
-    .site-main {
-      width: 100%;
-      max-width: 34rem;
-      margin-inline: auto;
-      padding-inline: 1.25rem;
+    .page {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      overflow: hidden;
     }
 
-    .site-header { padding-top: 1.5rem; }
+    /* Letters of the i2c logo, scattered around the page. */
+    .shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
 
-    .wordmark {
-      color: var(--text);
-      font: 700 1.0625rem/1 var(--font-mono);
-      letter-spacing: -0.02em;
+    .shape {
+      position: absolute;
+      left: calc(var(--x) - var(--ax) * var(--u));
+      top: calc(var(--y) - var(--ay) * var(--u));
+      width: calc(var(--w) * var(--u));
+      height: calc(var(--h) * var(--u));
+      fill: var(--ink);
+      transform-origin: calc(var(--ax) * var(--u)) calc(var(--ay) * var(--u));
+      animation:
+        shape-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) both,
+        shape-float var(--float-time) ease-in-out calc(var(--delay) + 1.2s) infinite;
+    }
+
+    .shape--i-dot {
+      --w: 12.5; --h: 12.5; --ax: 6.25; --ay: 6.25; --x: 9%; --y: 14%;
+      --from-x: -80px; --from-y: -60px; --from-r: 0deg; --delay: 0s;
+      --float-x: 6px; --float-y: -10px; --float-r: 0deg; --float-time: 7s;
+    }
+
+    .shape--i-stem {
+      --w: 10; --h: 32; --ax: 0; --ay: 0; --x: 4%; --y: 56%;
+      --from-x: -40px; --from-y: 120px; --from-r: -8deg; --delay: 0.08s;
+      --float-x: 0px; --float-y: -14px; --float-r: 0deg; --float-time: 9s;
+    }
+
+    .shape--c {
+      --w: 20; --h: 40; --ax: 20; --ay: 20; --x: 94%; --y: 9%;
+      --from-x: 60px; --from-y: -80px; --from-r: -45deg; --delay: 0.16s;
+      --float-x: -6px; --float-y: 6px; --float-r: 6deg; --float-time: 11s;
+    }
+
+    .shape--two {
+      --w: 40; --h: 54; --ax: 20; --ay: 20; --x: 90%; --y: 90%;
+      --from-x: 80px; --from-y: 100px; --from-r: 30deg; --delay: 0.24s;
+      --float-x: -8px; --float-y: -6px; --float-r: -4deg; --float-time: 10s;
+    }
+
+    .shape--dot {
+      --w: 12.5; --h: 12.5; --ax: 6.25; --ay: 6.25; --x: 22%; --y: 93%;
+      --from-x: 0px; --from-y: 90px; --from-r: 0deg; --delay: 0.32s;
+      --float-x: 8px; --float-y: -8px; --float-r: 0deg; --float-time: 8s;
+    }
+
+    @keyframes shape-in {
+      from {
+        opacity: 0;
+        transform: translate(var(--from-x), var(--from-y)) rotate(var(--from-r)) scale(0.7);
+      }
+    }
+
+    @keyframes shape-float {
+      50% {
+        translate: var(--float-x) var(--float-y);
+        rotate: var(--float-r);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .shape { animation: none; }
+    }
+
+    .site-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      padding-top: 1.75rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: inherit;
       text-decoration: none;
     }
 
-    .wordmark span { color: var(--muted); font-weight: 500; }
+    .brand__mark {
+      height: 2.25rem;
+      aspect-ratio: 83 / 54;
+      fill: currentColor;
+    }
 
-    .site-main {
-      flex: 1;
+    .brand__name {
+      font-size: 0.875rem;
+      line-height: 1.15;
+    }
+
+    .brand__name strong { font-weight: 700; }
+
+    .contact {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      min-height: 100svh;
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
-      padding-block: 2rem 4rem;
+      padding: var(--header-space) 1.25rem;
+      text-align: center;
     }
 
-    .card {
-      padding: clamp(1.5rem, 6vw, 2.25rem);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .eyebrow {
+    .contact__title {
       margin: 0;
-      color: var(--muted);
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-size: clamp(2.5rem, 9vw, 3.75rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 0.015em;
     }
 
-    /* The NIP is what the cashier types, so it scales to fill the card width. */
-    .nip {
-      margin: 1.5rem 0 0;
-      container-type: inline-size;
-    }
-
-    .nip__label {
+    .contact__title::after {
+      content: "";
       display: block;
-      color: var(--accent);
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+      width: 4rem;
+      height: 0.375rem;
+      margin: 1.75rem auto 0;
+      background: var(--ink);
     }
 
-    .nip__value {
-      display: block;
-      margin-top: 0.25rem;
-      font-size: 2.5rem;
-      font-size: clamp(1.75rem, 12.5cqi, 3.75rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* Visual digit groups only: copying the number still yields 9562242859. */
-    .nip__value span:not(:first-child) { margin-left: 0.28em; }
-
-    .party {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      font-size: clamp(1.125rem, 4.6vw, 1.3125rem);
+    .details {
+      margin-top: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 1.1875rem;
       font-style: normal;
       line-height: 1.45;
+      letter-spacing: 0.03em;
     }
 
-    .party__name {
-      display: block;
-      margin-bottom: 0.25rem;
-      font-size: clamp(1.25rem, 5.4vw, 1.5rem);
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      line-height: 1.25;
+    .details p { margin: 0; }
+    .details strong { font-weight: 700; }
+    .details__line { display: block; }
+
+    .details a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .party__line { display: block; }
+    .details a:hover,
+    .details a:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    /* On narrow screens the name fits on one line; the NIP is what a cashier needs. */
+    .details__name br { display: none; }
+    .details__nip { font-size: 1.625rem; }
+
+    /* Smallest phones: push the side shapes to the edges to keep them clear of the text. */
+    @media (max-width: 359px) {
+      .shape--i-stem { --x: 0%; }
+      .shape--c { --x: 99%; }
+      .details__nip { font-size: 1.5rem; }
+    }
+
+    /* Wide screens: the original four-column layout. */
+    @media (min-width: 1500px) {
+      :root {
+        --u: clamp(6px, 0.4167vw, 10px);
+        --header-space: 7rem;
+      }
+
+      .shape--i-dot { --x: 10.16%; --y: 19.43%; }
+      .shape--i-stem { --x: 18.23%; --y: 44.86%; }
+      .shape--c { --x: 76.1%; --y: 7.29%; }
+      .shape--two { --x: 88.88%; --y: 72%; }
+      .shape--dot { --x: 58.44%; --y: 88.29%; }
+
+      .site-header { padding-top: 47px; }
+      .brand { gap: 21px; }
+      .brand__mark { height: 47px; }
+      .brand__name { font-size: 17px; }
+
+      .contact__title { font-size: 61px; }
+
+      .contact__title::after {
+        width: 96px;
+        height: 8px;
+        margin-top: 64px;
+      }
+
+      .details {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 56px;
+        margin-top: 64px;
+        font-size: 17.5px;
+        line-height: 1.55;
+      }
+
+      .details__name { text-align: right; }
+      .details__name br { display: inline; }
+      .details__ids { text-align: left; }
+      .details__nip { font-size: inherit; }
+    }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <a class="wordmark" href="/">i2c<span>.pl</span></a>
-  </header>
+  <div class="page">
+    <div class="shapes" aria-hidden="true">
+      <svg class="shape shape--i-dot" viewBox="0 0 12.5 12.5"><circle cx="6.25" cy="6.25" r="6.25"/></svg>
+      <svg class="shape shape--i-stem" viewBox="0 0 10 32"><rect width="10" height="32"/></svg>
+      <svg class="shape shape--c" viewBox="0 0 20 40"><path d="M20 0A20 20 0 0 0 20 40V30A10 10 0 0 1 20 10Z"/></svg>
+      <svg class="shape shape--two" viewBox="0 0 40 54"><path d="M0 20A20 20 0 1 1 34.142 34.142L14.284 54H.142L27.071 27.071A10 10 0 1 0 10 20Z"/></svg>
+      <svg class="shape shape--dot" viewBox="0 0 12.5 12.5"><circle cx="6.25" cy="6.25" r="6.25"/></svg>
+    </div>
 
-  <main class="site-main">
-    <section class="card" aria-labelledby="title">
-      <h1 class="eyebrow" id="title">Dane do faktury</h1>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="i2c Mikołaj Szymański">
+        <svg class="brand__mark" viewBox="0 0 83 54" aria-hidden="true">
+          <circle cx="5" cy="6.25" r="6.25"/>
+          <rect y="24" width="10" height="30"/>
+          <path d="M19 20A20 20 0 1 1 53.142 34.142L33.284 54H19.142L46.071 27.071A10 10 0 1 0 29 20Z"/>
+          <circle cx="53" cy="47.75" r="6.25"/>
+          <path d="M83 14A20 20 0 0 0 83 54V44A10 10 0 0 1 83 24Z"/>
+        </svg>
+        <span class="brand__name">Mikołaj<br><strong>Szymański</strong></span>
+      </a>
+    </header>
 
-      <p class="nip">
-        <span class="nip__label">NIP</span>
-        <span class="nip__value"><span>956</span><wbr><span>224</span><wbr><span>28</span><wbr><span>59</span></span>
-      </p>
+    <main class="contact">
+      <h1 class="contact__title">Kontakt</h1>
 
-      <address class="party">
-        <span class="party__name">i2c Mikołaj Szymański</span>
-        <span class="party__line">ul. Jesienna 14</span>
-        <span class="party__line">87-100 Toruń</span>
+      <address class="details">
+        <p class="details__name"><strong>Mikołaj<br> Szymański</strong></p>
+        <p><a href="mailto:contact@i2c.pl">contact@i2c.pl</a></p>
+        <p>ul. Jesienna 14<br> 87-100 Toruń, Polska</p>
+        <p class="details__ids">
+          <span class="details__line details__nip"><strong>NIP</strong> 9562242859</span>
+          <span class="details__line"><strong>REGON</strong> 381511700</span>
+        </p>
       </address>
-    </section>
-  </main>
+    </main>
+  </div>
 </body>
 </html>
