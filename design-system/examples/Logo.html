@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../i2c.css">
+<script src="../i2c.js"></script><meta charset="utf-8"><title>Logo</title>
+<style>body{margin:0;font-family:var(--font-sans);} .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.tile{background:var(--paper);color:var(--ink);height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;position:relative}
+.tile > span{position:absolute;left:14px;bottom:10px;font:400 12px/1 var(--font-sans);color:var(--muted)}
+.tile [data-l]{color:var(--ink)} .icons{flex-direction:row;gap:14px}
+.ico{width:64px;height:64px;border-radius:14px;display:grid;place-items:center}
+.ico [data-l]{color:inherit}</style></head>
+<body>
+<div class="grid">
+  <div class="tile" data-theme="light"><div data-l="lockup" style="height:40px"></div><span>Logo główne</span></div>
+  <div class="tile" data-theme="dark"><div data-l="lockup" style="height:40px"></div><span>Logo główne, negatyw</span></div>
+  <div class="tile" data-theme="light"><div data-l="mark" style="height:40px"></div><span>Sam znak</span></div>
+  <div class="tile" data-theme="light" data-app="checker"><div data-l="app:checker"></div><span>i2c checker</span></div>
+  <div class="tile" data-theme="dark" data-app="know-how"><div data-l="app:know-how"></div><span>i2c know-how, negatyw</span></div>
+  <div class="tile icons" data-theme="light">
+    <div class="ico" style="background:var(--inverse);color:var(--on-inverse)"><div data-l="mark" style="height:22px"></div></div>
+    <div class="ico" data-app="checker" style="background:var(--app-accent);color:var(--app-on-accent)"><div data-l="mark" style="height:22px"></div></div>
+    <div class="ico" data-app="know-how" style="background:var(--app-accent);color:var(--app-on-accent)"><div data-l="mark" style="height:22px"></div></div>
+    <span>Ikony aplikacji</span></div>
+</div>
+<script>
+document.querySelectorAll('[data-l]').forEach(function(el){
+  var k=el.getAttribute('data-l');
+  if(k==='lockup') el.innerHTML=I2C.lockup().replace('class="i2c-mark"','class="i2c-mark" style="height:100%"');
+  else if(k==='mark') el.innerHTML=I2C.mark().replace('class="i2c-mark"','class="i2c-mark" style="height:100%"');
+  else el.innerHTML=I2C.app(k.split(':')[1],36);
+});
+</script>
+</body>
+</html>
