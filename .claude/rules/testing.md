@@ -39,3 +39,4 @@ Describe the behavior under test, not the function name:
 - Tests are independent: no shared mutable state, no order dependence.
 - Mock external services (network, database, file system) in unit tests.
 - Coverage is a signal, not a target: cover the paths that matter (branches, error handling) rather than chasing a percentage. When asked to raise coverage, use the `test-coverage` skill.
+- Language packs under `rules/<lang>/` quote 80% coverage targets; treat those as guidelines from the source material, not gates.

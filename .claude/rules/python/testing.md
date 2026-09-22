@@ -32,4 +32,3 @@ def test_calculate_total():
 def test_database_connection():
     ...
 ```
-

@@ -55,4 +55,4 @@ Do not create `SessionLocal()` or long-lived clients inside route handlers.
 - Clear `app.dependency_overrides` after tests.
 - Prefer async test clients for async applications.
 
-See skill: `fastapi-patterns`.
+See the `fastapi-patterns` skill.
