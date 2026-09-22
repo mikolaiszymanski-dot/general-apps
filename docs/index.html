@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>i2c.pl · Dane do faktury</title>
+  <meta name="description" content="i2c Mikołaj Szymański · NIP 9562242859">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="i2c.pl · Dane do faktury">
+  <meta property="og:description" content="i2c Mikołaj Szymański · NIP 9562242859">
+  <meta name="theme-color" content="#f5f5f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0c0f" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%232f5bff'/%3E%3Ctext%20x='16'%20y='20.5'%20fill='%23fff'%20font-family='ui-monospace,Menlo,Consolas,monospace'%20font-size='12'%20font-weight='700'%20text-anchor='middle'%3Ei2c%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #f5f5f2;
+      --glow: rgb(47 91 255 / 0.08);
+      --surface: #ffffff;
+      --text: #121216;
+      --muted: #676773;
+      --border: #e3e3dc;
+      --accent: #2f5bff;
+      --shadow: 0 1px 2px rgb(18 18 22 / 0.04), 0 24px 48px -24px rgb(18 18 22 / 0.2);
+      --radius: 1.5rem;
+      --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      color-scheme: light dark;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c0c0f;
+        --glow: rgb(142 165 255 / 0.1);
+        --surface: #17171c;
+        --text: #f2f2f5;
+        --muted: #a1a1ae;
+        --border: #2a2a33;
+        --accent: #8ea5ff;
+        --shadow: 0 24px 48px -24px rgb(0 0 0 / 0.8);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(60rem 24rem at 50% -6rem, var(--glow), transparent 70%) no-repeat, var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    .site-header,
+    .site-main {
+      width: 100%;
+      max-width: 34rem;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+
+    .site-header { padding-top: 1.5rem; }
+
+    .wordmark {
+      color: var(--text);
+      font: 700 1.0625rem/1 var(--font-mono);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+
+    .wordmark span { color: var(--muted); font-weight: 500; }
+
+    .site-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: 2rem 4rem;
+    }
+
+    .card {
+      padding: clamp(1.5rem, 6vw, 2.25rem);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* The NIP is what the cashier types, so it scales to fill the card width. */
+    .nip {
+      margin: 1.5rem 0 0;
+      container-type: inline-size;
+    }
+
+    .nip__label {
+      display: block;
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .nip__value {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 2.5rem;
+      font-size: clamp(1.75rem, 12.5cqi, 3.75rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Visual digit groups only: copying the number still yields 9562242859. */
+    .nip__value span:not(:first-child) { margin-left: 0.28em; }
+
+    .party {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: clamp(1.125rem, 4.6vw, 1.3125rem);
+      font-style: normal;
+      line-height: 1.45;
+    }
+
+    .party__name {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: clamp(1.25rem, 5.4vw, 1.5rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+
+    .party__line { display: block; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="/">i2c<span>.pl</span></a>
+  </header>
+
+  <main class="site-main">
+    <section class="card" aria-labelledby="title">
+      <h1 class="eyebrow" id="title">Dane do faktury</h1>
+
+      <p class="nip">
+        <span class="nip__label">NIP</span>
+        <span class="nip__value"><span>956</span><wbr><span>224</span><wbr><span>28</span><wbr><span>59</span></span>
+      </p>
+
+      <address class="party">
+        <span class="party__name">i2c Mikołaj Szymański</span>
+        <span class="party__line">ul. Jesienna 14</span>
+        <span class="party__line">87-100 Toruń</span>
+      </address>
+    </section>
+  </main>
+</body>
+</html>
