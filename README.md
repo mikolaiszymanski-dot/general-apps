@@ -22,7 +22,7 @@ Local preview: `python3 -m http.server --directory docs 8000`, then open http://
 
 ### Deployment
 
-GitHub Pages: Settings → Pages → Source "Deploy from a branch", folder `/docs`, custom domain `i2c.pl`, then "Enforce HTTPS".
+GitHub Pages: Settings → Pages → Source "Deploy from a branch", branch `main`, folder `/docs`, custom domain `i2c.pl`, then "Enforce HTTPS".
 
 DNS for `i2c.pl` (registrar: Aftermarket.pl), per [GitHub Docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site):
 

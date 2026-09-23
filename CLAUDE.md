@@ -5,4 +5,4 @@ Interfejs budujemy wyłącznie według design systemu i2c z folderu `design-syst
 
 ## Strona i2c.pl
 
-Strona jest w `docs/`, bo GitHub Pages publikuje tylko ten folder. Pliki design systemu, których używa, są kopiowane do `docs/ds/`: po każdej zmianie w `design-system/` uruchom `scripts/sync-design-system.sh` i zacommituj wynik. Nie edytuj `docs/ds/` ręcznie.
+Strona jest w `docs/`, bo GitHub Pages publikuje tylko ten folder, i to z gałęzi `main`: zmiany strony trafiają na i2c.pl dopiero po wmergowaniu do `main`. Pliki design systemu, których używa, są kopiowane do `docs/ds/`: po każdej zmianie w `design-system/` uruchom `scripts/sync-design-system.sh` i zacommituj wynik. Nie edytuj `docs/ds/` ręcznie.
