@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../i2c.css">
+<script src="../i2c.js"></script><meta charset="utf-8"><title>StatCard</title>
+<style>body{margin:0;font-family:var(--font-sans);} .grid{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;padding:16px;background:var(--canvas)}
+.i2c-card{display:grid;gap:14px}.acts{display:flex;gap:6px}.acts .i2c-icon-btn{width:32px;height:32px}
+.mid{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}</style></head>
+<body>
+<div class="grid">
+ <article class="i2c-card" data-app="checker">
+  <div class="i2c-card__head"><span class="i2c-eyebrow">Sprawdzone strony</span><span class="acts"><button class="i2c-icon-btn" aria-label="Filtry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button><button class="i2c-icon-btn" aria-label="Pełny ekran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v6h6M20 10V4h-6M4 20l7-7M20 4l-7 7"/></svg></button></span></div>
+  <div class="mid"><div><div class="i2c-metric">1 284</div><div class="i2c-sub">w tym miesiącu <span class="i2c-delta i2c-delta--up">+24%</span></div></div>
+   <div class="i2c-tabs" role="tablist"><button class="i2c-tab" role="tab">Tydzień</button><button class="i2c-tab" role="tab" aria-selected="true">Miesiąc</button><button class="i2c-tab" role="tab">Rok</button></div></div>
+  <div class="i2c-bars"><i style="height:55%"></i><i style="height:63%"></i><i style="height:38%"></i><i style="height:75%"></i><i style="height:86%"></i><i style="height:44%"></i><i style="height:36%"></i><i style="height:33%"></i><i style="height:27%"></i><i style="height:76%"></i><i style="height:95%"></i><i style="height:62%"></i><i style="height:32%"></i><i style="height:53%"></i><i style="height:91%"></i><i style="height:93%"></i><i style="height:71%"></i><i style="height:60%"></i><i style="height:47%"></i><i style="height:38%"></i><i style="height:58%"></i><i style="height:52%"></i><i style="height:28%"></i><i style="height:58%"></i><i style="height:59%"></i><i style="height:49%"></i><i style="height:46%"></i><i style="height:64%"></i><i style="height:62%"></i><i class="is-on" style="height:72%"></i><i class="is-hl" style="height:36%"></i><i class="is-on" style="height:68%"></i><i class="is-on" style="height:74%"></i><i class="is-on" style="height:89%"></i><i class="is-on" style="height:56%"></i><i class="is-on" style="height:47%"></i></div>
+  <div class="i2c-legend"><span>Poprzednio</span><span class="k-ink">Bieżące</span><span class="k-accent">Rekord</span></div>
+ </article>
+ <article class="i2c-card" data-app="know-how">
+  <div class="i2c-card__head"><span class="i2c-eyebrow">Notatki w bazie</span><span class="i2c-delta i2c-delta--down">-8%</span></div>
+  <div class="mid"><div><div class="i2c-metric">312</div><div class="i2c-sub">aktywne w tym kwartale</div></div></div>
+  <div class="i2c-bars"><i style="height:56%"></i><i style="height:85%"></i><i style="height:60%"></i><i style="height:36%"></i><i style="height:95%"></i><i style="height:63%"></i><i style="height:25%"></i><i style="height:62%"></i><i style="height:64%"></i><i style="height:90%"></i><i style="height:49%"></i><i style="height:77%"></i><i style="height:79%"></i><i style="height:61%"></i><i style="height:80%"></i><i style="height:82%"></i><i style="height:45%"></i><i class="is-on" style="height:54%"></i><i class="is-on" style="height:64%"></i><i class="is-on" style="height:58%"></i><i class="is-hl" style="height:30%"></i><i class="is-on" style="height:35%"></i><i class="is-on" style="height:30%"></i><i class="is-on" style="height:84%"></i></div>
+  <div class="i2c-legend"><span>Archiwum</span><span class="k-ink">Aktywne</span><span class="k-accent">Nowe</span></div>
+ </article>
+</div>
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../i2c.css">
+<script src="../i2c.js"></script><meta charset="utf-8"><title>Propozycje palety aplikacji</title>
+<style>
+body{margin:0;font-family:var(--font-sans);background:var(--canvas);color:var(--ink)}
+.wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:16px}
+.opt{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px;display:grid;gap:16px;align-content:start}
+header{display:flex;gap:12px} .k{width:32px;height:32px;flex:none;border-radius:var(--radius-sm);background:var(--inverse);color:var(--on-inverse);display:grid;place-items:center;font-weight:800}
+h3{margin:0 0 4px;font:600 18px/1.3 var(--font-sans)} p{margin:0;font:400 13px/1.45 var(--font-sans);color:var(--ink-2)}
+.sws{display:grid;grid-template-columns:repeat(4,1fr);gap:6px} .sw{height:72px;border-radius:var(--radius-md);padding:8px;display:flex;flex-direction:column;justify-content:space-between;font:400 11px/1.2 var(--font-sans)}
+.sw b{font-weight:700;font-size:12px}
+.demo{display:grid;gap:10px}
+.band{background:var(--app-accent-soft);border-radius:var(--radius-md);padding:16px;display:grid;gap:12px;justify-items:start;color:#000}
+.band .h{font:300 22px/1.15 var(--font-sans);color:#000} .band .h b{font-weight:700}
+.band .i2c-lockup{color:#000}
+.mini{display:grid;gap:8px;padding:16px} .mini .i2c-metric{display:flex;align-items:center;gap:8px}
+.mini .i2c-bars i{background:var(--faint)}
+</style></head>
+<body><div class="wrap"><section class="opt" style="--app-accent:#9ff09c;--app-on-accent:#000000;--app-accent-soft:#e6f9e5">
+ <header><span class="k">A</span><div><h3>Pastel (domyślny w tokenach)</h3><p>Jasne, pastelowe akcenty z czarnym tekstem. Najbliżej referencji Ledgerix. Spokojne, dobrze znoszą duże powierzchnie.</p></div></header>
+ <div class="sws"><div class="sw" style="background:#9ff09c;color:#000000"><b>checker</b><span>#9ff09c</span></div><div class="sw" style="background:#9fd4ff;color:#000000"><b>know-how</b><span>#9fd4ff</span></div><div class="sw" style="background:#ffc890;color:#000000"><b>app 3</b><span>#ffc890</span></div><div class="sw" style="background:#cbbcff;color:#000000"><b>app 4</b><span>#cbbcff</span></div></div>
+ <div class="demo">
+   <div class="band"><div data-l="app"></div><p class="h">Mniej szumu.<br><b>Więcej konkretu.</b></p><button class="i2c-btn i2c-btn--accent">Sprawdź stronę</button></div>
+   <div class="i2c-card mini"><span class="i2c-eyebrow">Wynik</span><div class="i2c-metric">92 <span class="i2c-delta i2c-delta--up">+24%</span></div><div class="i2c-bars" style="height:56px"><i style="height:40%;"></i><i style="height:55%;"></i><i style="height:35%;"></i><i style="height:60%;"></i><i style="height:48%;"></i><i style="height:70%;"></i><i style="height:52%;"></i><i style="height:64%;"></i><i style="height:58%;"></i><i style="height:88%;background:#9ff09c"></i><i style="height:62%;"></i><i style="height:50%;"></i></div></div>
+ </div>
+</section><section class="opt" style="--app-accent:#c6ff3d;--app-on-accent:#000000;--app-accent-soft:#f3ffd6">
+ <header><span class="k">B</span><div><h3>Sygnał</h3><p>Nasycone, elektryczne kolory z czarnym tekstem. Mocno kontrastują z czarno-białą marką, dobre na i2c.pl i w social media. Na dużych powierzchniach męczą.</p></div></header>
+ <div class="sws"><div class="sw" style="background:#c6ff3d;color:#000000"><b>checker</b><span>#c6ff3d</span></div><div class="sw" style="background:#3de0ff;color:#000000"><b>know-how</b><span>#3de0ff</span></div><div class="sw" style="background:#ff7a1a;color:#000000"><b>app 3</b><span>#ff7a1a</span></div><div class="sw" style="background:#ff66c4;color:#000000"><b>app 4</b><span>#ff66c4</span></div></div>
+ <div class="demo">
+   <div class="band"><div data-l="app"></div><p class="h">Mniej szumu.<br><b>Więcej konkretu.</b></p><button class="i2c-btn i2c-btn--accent">Sprawdź stronę</button></div>
+   <div class="i2c-card mini"><span class="i2c-eyebrow">Wynik</span><div class="i2c-metric">92 <span class="i2c-delta i2c-delta--up">+24%</span></div><div class="i2c-bars" style="height:56px"><i style="height:40%;"></i><i style="height:55%;"></i><i style="height:35%;"></i><i style="height:60%;"></i><i style="height:48%;"></i><i style="height:70%;"></i><i style="height:52%;"></i><i style="height:64%;"></i><i style="height:58%;"></i><i style="height:88%;background:#c6ff3d"></i><i style="height:62%;"></i><i style="height:50%;"></i></div></div>
+ </div>
+</section><section class="opt" style="--app-accent:#0f5b3a;--app-on-accent:#ffffff;--app-accent-soft:#e3efe9">
+ <header><span class="k">C</span><div><h3>Głębia</h3><p>Ciemne, nasycone kolory z białym tekstem. Bardziej premium i poważnie. W motywie ciemnym wymagają jaśniejszych wariantów (na czerni tylko ok. 2,5:1).</p></div></header>
+ <div class="sws"><div class="sw" style="background:#0f5b3a;color:#ffffff"><b>checker</b><span>#0f5b3a</span></div><div class="sw" style="background:#1f3fd6;color:#ffffff"><b>know-how</b><span>#1f3fd6</span></div><div class="sw" style="background:#b3401b;color:#ffffff"><b>app 3</b><span>#b3401b</span></div><div class="sw" style="background:#6a2c9e;color:#ffffff"><b>app 4</b><span>#6a2c9e</span></div></div>
+ <div class="demo">
+   <div class="band"><div data-l="app"></div><p class="h">Mniej szumu.<br><b>Więcej konkretu.</b></p><button class="i2c-btn i2c-btn--accent">Sprawdź stronę</button></div>
+   <div class="i2c-card mini"><span class="i2c-eyebrow">Wynik</span><div class="i2c-metric">92 <span class="i2c-delta i2c-delta--up">+24%</span></div><div class="i2c-bars" style="height:56px"><i style="height:40%;"></i><i style="height:55%;"></i><i style="height:35%;"></i><i style="height:60%;"></i><i style="height:48%;"></i><i style="height:70%;"></i><i style="height:52%;"></i><i style="height:64%;"></i><i style="height:58%;"></i><i style="height:88%;background:#0f5b3a"></i><i style="height:62%;"></i><i style="height:50%;"></i></div></div>
+ </div>
+</section></div>
+<script>document.querySelectorAll('[data-l]').forEach(function(el){el.innerHTML=I2C.app('checker',22);});</script>
+</body></html>

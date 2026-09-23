@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>i2c · Mikołaj Szymański</title>
+  <meta name="description" content="Kontakt i dane do faktury: i2c Mikołaj Szymański, NIP 9562242859.">
+  <meta name="robots" content="noindex">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://i2c.pl/">
+  <meta property="og:title" content="i2c · Mikołaj Szymański">
+  <meta property="og:description" content="Kontakt i dane do faktury · NIP 9562242859">
+  <meta property="og:image" content="https://i2c.pl/ds/assets/Web/og-i2c-1200x630.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="ds/assets/Web/favicon-i2c.svg" type="image/svg+xml">
+  <link rel="icon" href="ds/assets/Web/favicon-i2c-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="ds/assets/Web/apple-touch-icon-i2c-180.png">
+  <link rel="preload" href="fonts/mulish-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/mulish-latin-ext-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="ds/tokens.css">
+  <link rel="stylesheet" href="ds/i2c.css">
+  <style>
+    /* Mulish self-hosted (SIL OFL 1.1, fonts/OFL.txt) in place of the Google Fonts import of design-system/i2c.css. */
+    @font-face {
+      font-family: "Mulish";
+      font-style: normal;
+      font-weight: 200 1000;
+      font-display: swap;
+      src: url("fonts/mulish-latin-ext-wght-normal.woff2") format("woff2-variations"),
+           url("fonts/mulish-latin-ext-wght-normal.woff2") format("woff2");
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    @font-face {
+      font-family: "Mulish";
+      font-style: normal;
+      font-weight: 200 1000;
+      font-display: swap;
+      src: url("fonts/mulish-latin-wght-normal.woff2") format("woff2-variations"),
+           url("fonts/mulish-latin-wght-normal.woff2") format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body { margin: 0; }
+
+    .page {
+      /* --u: pixels per unit of the original mark, whose stroke is 4.07 units wide. */
+      --u: clamp(6.4px, 1.96vw, 12.3px);
+      --header-space: calc(var(--space-8) + var(--space-5));
+      min-height: 100vh;
+      min-height: 100svh;
+    }
+
+    /* Motif "rozbity znak": the original mark's pieces, scattered, flying in and floating. */
+    .shape {
+      position: absolute;
+      left: calc(var(--x) - var(--ax) * var(--u));
+      top: calc(var(--y) - var(--ay) * var(--u));
+      width: calc(var(--w) * var(--u));
+      height: calc(var(--h) * var(--u));
+      transform-origin: calc(var(--ax) * var(--u)) calc(var(--ay) * var(--u));
+      animation:
+        shape-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) var(--delay) both,
+        shape-float var(--float-time) ease-in-out calc(var(--delay) + 1.2s) infinite;
+    }
+
+    .shape--i-dot {
+      --w: 5.0977; --h: 5.0977; --ax: 2.5488; --ay: 2.5488; --x: 9%; --y: 14%;
+      --from-x: -80px; --from-y: -60px; --from-r: 0deg; --delay: 0s;
+      --float-x: 6px; --float-y: -10px; --float-r: 0deg; --float-time: 7s;
+    }
+
+    .shape--i-stem {
+      --w: 4.0742; --h: 12.8789; --ax: 0; --ay: 0; --x: 4%; --y: 56%;
+      --from-x: -40px; --from-y: 120px; --from-r: -8deg; --delay: 0.08s;
+      --float-x: 0px; --float-y: -14px; --float-r: 0deg; --float-time: 9s;
+    }
+
+    .shape--c {
+      --w: 8.1953; --h: 16.3906; --ax: 8.1953; --ay: 8.1953; --x: 94%; --y: 9%;
+      --from-x: 60px; --from-y: -80px; --from-r: -45deg; --delay: 0.16s;
+      --float-x: -6px; --float-y: 6px; --float-r: 6deg; --float-time: 11s;
+    }
+
+    .shape--two {
+      --w: 17.1445; --h: 23.3281; --ax: 8.949; --ay: 8.1996; --x: 90%; --y: 90%;
+      --from-x: 80px; --from-y: 100px; --from-r: 30deg; --delay: 0.24s;
+      --float-x: -8px; --float-y: -6px; --float-r: -4deg; --float-time: 10s;
+    }
+
+    .shape--dot {
+      --w: 5.0938; --h: 5.0977; --ax: 2.5469; --ay: 2.5488; --x: 22%; --y: 93%;
+      --from-x: 0px; --from-y: 90px; --from-r: 0deg; --delay: 0.32s;
+      --float-x: 8px; --float-y: -8px; --float-r: 0deg; --float-time: 8s;
+    }
+
+    @keyframes shape-in {
+      from {
+        opacity: 0;
+        transform: translate(var(--from-x), var(--from-y)) rotate(var(--from-r)) scale(0.7);
+      }
+    }
+
+    @keyframes shape-float {
+      50% {
+        translate: var(--float-x) var(--float-y);
+        rotate: var(--float-r);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .shape { animation: none; }
+    }
+
+    .site-header {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      padding-top: var(--space-6);
+    }
+
+    .brand { display: block; line-height: 0; }
+    .brand__logo { display: block; width: auto; height: 36px; }
+
+    .brand:focus-visible,
+    .contact a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .contact {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-6);
+      padding: var(--header-space) var(--space-5);
+      text-align: center;
+    }
+
+    .contact__title {
+      font-size: clamp(40px, 11vw, 64px);
+      line-height: 1;
+    }
+
+    /* .i2c-contact is the four-column row from the design system; narrow screens stack it. */
+    .contact__details {
+      grid-auto-flow: row;
+      justify-items: center;
+      gap: var(--space-4);
+      font-style: normal;
+    }
+
+    .contact__details p { margin: 0; }
+    .contact__name br { display: none; }
+    .contact__line { display: block; }
+
+    /* The number a cashier types when the phone is shown at a till. */
+    .contact__nip { font-size: 26px; }
+
+    .contact a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    @media (max-width: 359px) {
+      .shape--i-stem { --x: 0%; }
+      .shape--c { --x: 99%; }
+      .contact__nip { font-size: 24px; }
+    }
+
+    /* Wide screens: the original 1920 x 700 composition and the four-column row. */
+    @media (min-width: 1600px) {
+      .page {
+        --u: 1.01626vw;
+        --header-space: calc(var(--space-9) + var(--space-4));
+      }
+
+      .shape--i-dot { --x: 10.142%; --y: 19.39%; }
+      .shape--i-stem { --x: 18.229%; --y: 44.857%; }
+      .shape--c { --x: 76.037%; --y: 7.584%; }
+      .shape--two { --x: 89.563%; --y: 71.713%; }
+      .shape--dot { --x: 58.422%; --y: 88.247%; }
+
+      .site-header { padding-top: var(--space-7); }
+      .brand__logo { height: 50px; }
+      .contact { gap: var(--space-8); }
+
+      .contact__details {
+        grid-auto-flow: column;
+        justify-items: stretch;
+        gap: var(--space-8);
+      }
+
+      .contact__name { text-align: right; }
+      .contact__name br { display: inline; }
+      .contact__ids { text-align: left; }
+      .contact__nip { font-size: inherit; }
+    }
+  </style>
+</head>
+<body>
+  <div class="i2c-brand page">
+    <div class="i2c-brand__motif" aria-hidden="true">
+      <svg class="shape shape--i-dot" viewBox="54.8047 128.4844 5.0977 5.0977"><path d="M 59.902344 131.035156 C 59.902344 132.441406 58.761719 133.582031 57.355469 133.582031 C 55.945312 133.582031 54.804688 132.441406 54.804688 131.035156 C 54.804688 129.628906 55.945312 128.484375 57.355469 128.484375 C 58.761719 128.484375 59.902344 129.628906 59.902344 131.035156"/></svg>
+      <svg class="shape shape--i-stem" viewBox="55.3164 138.9336 4.0742 12.8789"><path d="M 59.390625 151.8125 L 55.316406 151.8125 L 55.316406 138.933594 L 59.390625 138.933594 Z"/></svg>
+      <svg class="shape shape--c" viewBox="83.2383 135.8711 8.1953 16.3906"><path d="M 91.433594 152.261719 C 86.914062 152.261719 83.238281 148.585938 83.238281 144.066406 C 83.238281 139.546875 86.914062 135.871094 91.433594 135.871094 L 91.433594 139.945312 C 89.164062 139.945312 87.316406 141.792969 87.316406 144.066406 C 87.316406 146.339844 89.164062 148.183594 91.433594 148.183594 Z"/></svg>
+      <svg class="shape shape--two" viewBox="62.8867 128.4844 17.1445 23.3281"><path d="M 71.835938 128.484375 C 67.316406 128.484375 63.640625 132.164062 63.640625 136.683594 L 67.714844 136.683594 C 67.714844 134.410156 69.5625 132.5625 71.835938 132.5625 C 74.105469 132.5625 75.957031 134.410156 75.957031 136.683594 C 75.957031 137.757812 75.363281 138.886719 74.648438 139.710938 L 62.886719 151.8125 L 68.46875 151.8125 L 77.832031 142.28125 C 79.285156 140.675781 80.03125 138.832031 80.03125 136.683594 C 80.03125 132.164062 76.355469 128.484375 71.835938 128.484375"/></svg>
+      <svg class="shape shape--dot" viewBox="75.7734 147.1641 5.0938 5.0977"><path d="M 80.867188 149.714844 C 80.867188 151.121094 79.726562 152.261719 78.320312 152.261719 C 76.914062 152.261719 75.773438 151.121094 75.773438 149.714844 C 75.773438 148.308594 76.914062 147.164062 78.320312 147.164062 C 79.726562 147.164062 80.867188 148.308594 80.867188 149.714844"/></svg>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="/"><img class="brand__logo" src="ds/assets/Logos/i2c-lockup-black.svg" alt="i2c Mikołaj Szymański" width="131" height="36"></a>
+    </header>
+
+    <main class="contact">
+      <h1 class="i2c-display contact__title">Kontakt</h1>
+      <hr class="i2c-rule">
+      <address class="i2c-contact contact__details">
+        <p class="contact__name"><b>Mikołaj<br> Szymański</b></p>
+        <p><a href="mailto:contact@i2c.pl">contact@i2c.pl</a></p>
+        <p>Jesienna 14<br> 87-100 Toruń, Polska</p>
+        <p class="contact__ids">
+          <span class="contact__line contact__nip"><b>NIP</b> 9562242859</span>
+          <span class="contact__line"><b>REGON</b> 381511700</span>
+        </p>
+      </address>
+    </main>
+  </div>
+</body>
+</html>

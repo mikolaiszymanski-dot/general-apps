@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../i2c.css">
+<script src="../i2c.js"></script><meta charset="utf-8"><title>Button</title>
+<style>body{margin:0;font-family:var(--font-sans);} .rows{display:grid;gap:14px;padding:16px;background:var(--canvas)} .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.i2c-btn svg{width:16px;height:16px} .note{font:400 12px/1 var(--font-sans);color:var(--muted)} .brand{background:var(--paper);padding:10px;margin:0 -16px -16px;padding:12px 16px}</style></head>
+<body>
+<div class="rows">
+  <div class="row"><button class="i2c-btn i2c-btn--primary">Uruchom sprawdzenie</button><button class="i2c-btn i2c-btn--secondary">Eksportuj PDF</button><button class="i2c-btn i2c-btn--ghost">Anuluj</button><button class="i2c-btn i2c-btn--primary" disabled>Niedostępne</button></div>
+  <div class="row" data-app="checker"><button class="i2c-btn i2c-btn--accent i2c-btn--lg">Sprawdź stronę <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button class="i2c-btn i2c-btn--accent">checker</button><button class="i2c-btn i2c-btn--accent i2c-btn--sm">Mały</button></div>
+  <div class="row" data-app="know-how"><button class="i2c-btn i2c-btn--accent i2c-btn--lg">Otwórz bazę wiedzy</button><span class="note">know-how</span></div>
+  <div class="row brand"><button class="i2c-btn i2c-btn--brand">Napisz do mnie</button><span class="note">i2c.pl: kanciasty, czarny</span></div>
+</div>
+<script>
+
+</script>
+</body>
+</html>
